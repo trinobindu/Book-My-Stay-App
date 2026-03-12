@@ -1,99 +1,52 @@
 
 import java.util.*;
 
-// Abstract Room class
-abstract class Room {
-    protected String roomType;
-    protected double pricePerNight;
+// Reservation class representing a booking request
+class Reservation {
+    private String guestName;
+    private String roomType;
 
-    public Room(String roomType, double pricePerNight) {
+    public Reservation(String guestName, String roomType) {
+        this.guestName = guestName;
         this.roomType = roomType;
-        this.pricePerNight = pricePerNight;
+    }
+
+    public String getGuestName() {
+        return guestName;
     }
 
     public String getRoomType() {
         return roomType;
     }
 
-    public double getPricePerNight() {
-        return pricePerNight;
-    }
-
-    public abstract void displayDetails();
-}
-
-// Standard Room
-class StandardRoom extends Room {
-
-    public StandardRoom() {
-        super("Standard Room", 2000);
-    }
-
-    public void displayDetails() {
-        System.out.println("Room: " + roomType + " | Price: ₹" + pricePerNight);
+    public void displayReservation() {
+        System.out.println("Guest: " + guestName + " | Requested Room: " + roomType);
     }
 }
 
-// Deluxe Room
-class DeluxeRoom extends Room {
+// Booking Request Queue using FIFO
+class BookingRequestQueue {
 
-    public DeluxeRoom() {
-        super("Deluxe Room", 3500);
+    private Queue<Reservation> queue = new LinkedList<>();
+
+    // Add request to queue
+    public void addRequest(Reservation reservation) {
+        queue.add(reservation);
+        System.out.println("Booking request added for " + reservation.getGuestName());
     }
 
-    public void displayDetails() {
-        System.out.println("Room: " + roomType + " | Price: ₹" + pricePerNight);
-    }
-}
+    // Display queued requests
+    public void displayQueue() {
+        System.out.println("\nCurrent Booking Requests (FIFO Order)");
+        System.out.println("--------------------------------------");
 
-// Suite Room
-class SuiteRoom extends Room {
+        if (queue.isEmpty()) {
+            System.out.println("No booking requests in queue.");
+            return;
+        }
 
-    public SuiteRoom() {
-        super("Suite Room", 5000);
-    }
-
-    public void displayDetails() {
-        System.out.println("Room: " + roomType + " | Price: ₹" + pricePerNight);
-    }
-}
-
-// Centralized Inventory using HashMap
-class RoomInventory {
-
-    private HashMap<String, Integer> inventory = new HashMap<>();
-
-    public void registerRoom(String type, int count) {
-        inventory.put(type, count);
-    }
-
-    public int getAvailability(String type) {
-        return inventory.getOrDefault(type, 0);
-    }
-
-    public HashMap<String, Integer> getInventory() {
-        return inventory;
-    }
-}
-
-// Search Service (Read-only access)
-class SearchService {
-
-    public void searchAvailableRooms(RoomInventory inventory, List<Room> rooms) {
-
-        System.out.println("\nAvailable Rooms:");
-        System.out.println("-----------------------");
-
-        for (Room room : rooms) {
-
-            int available = inventory.getAvailability(room.getRoomType());
-
-            // Filter unavailable rooms
-            if (available > 0) {
-                room.displayDetails();
-                System.out.println("Available: " + available);
-                System.out.println("-----------------------");
-            }
+        for (Reservation r : queue) {
+            r.displayReservation();
         }
     }
 }
@@ -105,25 +58,25 @@ public class BookMyStayApp {
 
         System.out.println("=================================");
         System.out.println("        BOOK MY STAY APP");
-        System.out.println("      Room Search Service");
+        System.out.println("   Booking Request Queue (FIFO)");
         System.out.println("=================================");
 
-        // Initialize rooms
-        List<Room> rooms = new ArrayList<>();
-        rooms.add(new StandardRoom());
-        rooms.add(new DeluxeRoom());
-        rooms.add(new SuiteRoom());
+        BookingRequestQueue bookingQueue = new BookingRequestQueue();
 
-        // Initialize inventory
-        RoomInventory inventory = new RoomInventory();
-        inventory.registerRoom("Standard Room", 5);
-        inventory.registerRoom("Deluxe Room", 0); // unavailable
-        inventory.registerRoom("Suite Room", 2);
+        // Guests submitting booking requests
+        Reservation r1 = new Reservation("Alice", "Standard Room");
+        Reservation r2 = new Reservation("Bob", "Deluxe Room");
+        Reservation r3 = new Reservation("Charlie", "Suite Room");
 
-        // Guest searches available rooms
-        SearchService search = new SearchService();
-        search.searchAvailableRooms(inventory, rooms);
+        // Add requests to queue
+        bookingQueue.addRequest(r1);
+        bookingQueue.addRequest(r2);
+        bookingQueue.addRequest(r3);
 
-        System.out.println("\nSearch completed. No system data was modified.");
+        // Display queue (arrival order preserved)
+        bookingQueue.displayQueue();
+
+        System.out.println("\nRequests are waiting for processing.");
+        System.out.println("No room inventory has been modified yet.");
     }
 }
