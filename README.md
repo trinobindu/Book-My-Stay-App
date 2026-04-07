@@ -1,61 +1,61 @@
-# 🚆 Train Consist Management App
+# 🏨 Hotel Booking Management System
 
 ## 📌 Overview
 
-The **Train Consist Management App** is a console-based Java application that simulates how a railway system manages a train’s consist (i.e., the collection of bogies attached to an engine).
+The **Hotel Booking Management System** is a console-based Java application that simulates how hotels manage room bookings, availability, and customer requests.
 
-This project is designed as an **App-Based Learning model** to demonstrate how **Core Java concepts and Data Structures** are applied to solve real-world system design problems in railway operations.
+This project follows an **App-Based Learning approach** to demonstrate how **Core Java and Data Structures** are applied in real-world software engineering scenarios.
 
 ---
 
 ## 🎯 Objective
 
-The goal of this project is to bridge the gap between **theoretical knowledge** and **practical implementation** by:
+The goal of this project is to showcase the practical application of data structures in solving common challenges in hotel booking systems, such as:
 
-* Demonstrating efficient use of data structures
-* Managing dynamic train composition
-* Ensuring system consistency and validation
-* Building a scalable and maintainable design
+* Ensuring fair request handling using FIFO principles
+* Maintaining real-time room availability
+* Preventing double-booking through uniqueness enforcement
+* Designing a scalable and maintainable system
 
 ---
 
 ## 🧠 Learning Approach
 
-This application is built incrementally using multiple **use cases**, where each stage introduces a new concept.
+The application is built incrementally using multiple **use cases**, where each stage introduces a new concept while reinforcing previously learned ones.
 
-Each use case focuses on:
+Each stage focuses on:
 
-* Selecting the right data structure
-* Solving a real-world operational problem
-* Improving design through refinement
+* ✔ Selecting the appropriate data structure
+* ✔ Understanding the real-world problem it solves
+* ✔ Identifying limitations and improving design
 
 ---
 
 ## ⚙️ Features
 
-### 🚍 Passenger Bogies
+### 🛏️ Room Management
 
-* Types: Sleeper, AC Chair, First Class
-* Seat capacity tracking
-* Passenger management
+* Different room types (Standard, Deluxe, Suite)
+* Track room availability
+* Dynamic allocation and release of rooms
 
-### 📦 Goods Bogies
+### 📅 Booking System
 
-* Types: Rectangular, Cylindrical
-* Cargo assignment
-* Safety validation for cargo types
+* FIFO-based booking requests (Queue implementation)
+* Customer booking records
+* Check-in and check-out handling
 
-### 🔄 Train Operations
+### 🚫 Validation & Constraints
 
-* Add / remove bogies dynamically
-* Maintain train composition
-* Prevent duplicate or invalid entries
-
-### ⚠️ Safety & Validation
-
-* Cargo safety checks
+* Prevents double-booking of rooms
+* Unique booking IDs
 * Exception handling for invalid operations
-* Ensures system consistency
+
+### 🔄 System Operations
+
+* Add / cancel bookings
+* View room availability
+* Manage booking history
 
 ---
 
@@ -65,22 +65,22 @@ Each use case focuses on:
 * **Object-Oriented Programming (OOP)**
 * **Data Structures**
 
-  * ArrayList
-  * LinkedList (optional enhancement)
+  * Queue (for request handling)
+  * ArrayList / HashSet (for storage and uniqueness)
 
 ---
 
 ## 📁 Project Structure
 
 ```
-TrainConsistManagement/
+HotelBookingManagement/
 │── Main.java
-│── Train.java
-│── Bogie.java
-│── PassengerBogie.java
-│── GoodsBogie.java
+│── Hotel.java
+│── Room.java
+│── Booking.java
+│── BookingManager.java
 │── Exceptions/
-│     └── CargoSafetyException.java
+│     └── BookingException.java
 ```
 
 ---
@@ -112,17 +112,18 @@ TrainConsistManagement/
 * Classes and Objects
 * Inheritance & Polymorphism
 * Exception Handling
-* Collections Framework
-* Data Structure Application in Real Systems
+* Java Collections Framework
+* Queue (FIFO) implementation
+* Data structure application in real systems
 
 ---
 
 ## 🚀 Future Enhancements
 
 * GUI-based interface (JavaFX/Swing)
-* Database integration
-* Real-time train tracking simulation
-* Advanced scheduling system
+* Database integration (MySQL)
+* Online booking simulation
+* Payment gateway integration
 
 ---
 
@@ -134,7 +135,7 @@ TRINOBINDU DAS
 
 ## 📌 Note
 
-This project is focused on **logic, design, and data structure implementation**, not on UI complexity. It is intended for **learning and academic purposes**.
+This project focuses on **core logic, system design, and data structure usage** rather than user interface complexity. It is intended for **learning and academic purposes**.
 
 ---
 
